@@ -1,59 +1,65 @@
 <template>
-<div class="blog">
-  <div class="blog-header">
-      <span>测试标题</span>
+  <div class="containers">
+      <div class="container">
+        <textarea v-model="md"></textarea>
+      </div>
+      <div class="container" v-html="html">
+      </div>
   </div>
-  <div class="blog-main">    
-  </div>
-</div>
 </template>
 
 <script>
+import marked from "marked";
+
 export default {
   name: "Blog",
+  data() {
+    return {
+      html: "",
+      md: ""
+    };
+  },
   mounted() {
-    
   },
-  methods: {
-    
-  },
-  props: {
+  methods: {},
+  props: {},
+  watch: {
+    md:function(newValue){
+      this.html = marked(newValue);
+    }
   }
 };
 </script>
 
-<style>
-* {
-  box-sizing: border-box;
-}
-
-.blog {
-    width: 800px;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    margin-left: -400px;
-    overflow-x: hidden;
-    background-color: rgba(255, 255, 255, 0.8);
+<style scoped>
+.containers{
     display: flex;
-    transition: 4.6s;
+    height: calc(100vh + 128px);
+}
+
+.containers .container{
+    flex-basis: 50%;
+    padding: 5px;
+    display: flex;
     flex-direction: column;
-    border-radius: 10px;
-    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.2);
+    height: 100%;
+    box-sizing: border-box;
+    margin-top: 5px;
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    overflow: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
 
-.blog .blog-header{
-    position: absolute;
-    top: 6%;
-    width: 200px;
-    height: 40px;
-    left: 50%;
-    margin-left: -100px;
-    text-align: center;
-    line-height: 40px;
+.containers .container textarea{
+  margin-top: 5px;
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    overflow: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
 }
-
-
-
 </style>
+
+

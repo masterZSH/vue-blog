@@ -1,22 +1,25 @@
 <template>
   <div id="app">
-    <Flow></Flow>
-    <Blog></Blog>
+      <Home></Home>
   </div>
 </template>
 
 <script>
-import Flow from "./components/Flow";
-import Blog from "./components/Blog";
-
+import Home from "./components/Home";
 export default {
-  name: "App",
+  name: 'app',
   components: {
-    Flow: Flow,
-    Blog: Blog
+    Home:Home
   }
-};
+}
 </script>
 
 <style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+
+}
 </style>
