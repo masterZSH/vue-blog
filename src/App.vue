@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-      <Home></Home>
+      <router-view class="view"></router-view>
   </div>
 </template>
 
 <script>
-import Home from "./components/Home";
 export default {
   name: 'app',
   components: {
-    Home:Home
+    
   }
 }
 </script>
@@ -20,6 +19,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-
+  color: #332c50;
 }
 </style>

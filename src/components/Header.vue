@@ -1,7 +1,9 @@
 <template>
     <Menu v-on:on-select="selectMenu" mode="horizontal" :theme="theme1" active-name="1">
         <div class="in-block site">
-            我的站点
+        <router-link to="/flow">
+        我的站点
+        </router-link>
         </div>
 
         <MenuItem name="1">
