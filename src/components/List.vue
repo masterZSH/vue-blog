@@ -1,11 +1,9 @@
 <template>
-  <Scroll :on-reach-bottom="handleReachBottom">
-    <Card
-      dis-hover
-      v-for="(item, index) in list1"
-      :key="index"
-      style="margin: 32px 0"
-    >Content {{ item }}</Card>
+  <Scroll :height="500" :on-reach-bottom="handleReachBottom">
+    <Card :key="index" v-for="(item,index) in list1" style="width:950px;margin:0 auto;margin-bottom:20px;cursor:pointer;">
+            <p slot="title">测试标题</p>
+            <p>测试简介测试简介测试简介...........</p>
+    </Card>
   </Scroll>
 </template>
 
