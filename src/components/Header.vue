@@ -1,49 +1,45 @@
 <template>
-    <Menu v-on:on-select="selectMenu" mode="horizontal" :theme="theme1" active-name="1">
-        <div class="in-block site">
-        <router-link to="/flow">
-        我的站点
-        </router-link>
-        </div>
-
-        <MenuItem name="1">
-            <Icon type="ios-paper" />
-            首页
-        </MenuItem>
-
-        <MenuItem name="2">
-            <Icon type="ios-people" />
-            测试
-        </MenuItem>
-
-        <MenuItem name="4">
-            <Icon type="ios-construct" />
-            综合设置
-        </MenuItem>
-    </Menu>
+  <Menu v-if="menus.length>0" v-on:on-select="selectMenu" mode="horizontal" :theme="theme" :active-name="activeMenu.name">
+    <div class="in-block site">
+      <router-link to="/flow">我的站点</router-link>
+    </div>
+    <MenuItem :key="key"  :name="item.name" v-for="(item,key) in menus">
+      <Icon :type="item.icon" />{{item.title}}
+    </MenuItem>
+  </Menu>
 </template>
 
 <script>
-    export default {
-        name:"Header",
-        data () {
-            return {
-                theme1: 'light'
-            }
-        },
-        methods: {
-            selectMenu:function(e){
-                console.log(e);
-            }
-        }
+import configMenu from "../config/menu";
+export default {
+  name: "Header",
+  mounted() {
+    if (this.$store.state.menu.menus.length === 0) {
+      this.$store.dispatch("initMenu", configMenu);
     }
+    this.menus = this.$store.state.menu.menus;
+    this.activeMenu = this.menus.find(item=>item.active === true);
+  },
+  data() {
+    return {
+      theme: "light",      // 主题
+      menus: [],           // 菜单
+      activeMenu: null     // 激活的菜单 
+    };
+  },
+  methods: {
+    selectMenu: function(e) {
+       this.$emit("selectMenu",e);
+    }
+  }
+};
 </script>
 <style scoped>
-    @import "../assets/common.css";
-    
-    .site{
-        font-size: 20px;
-        color: #101010;
-        cursor: pointer;
-    }
+@import "../assets/common.css";
+
+.site {
+  font-size: 20px;
+  color: #101010;
+  cursor: pointer;
+}
 </style>
