@@ -4,6 +4,7 @@ export default [
         title: "首页",
         icon: "newspaper-outline",
         active: true,
+        to: "/index"
     },
     {
         name: "data-flow",
