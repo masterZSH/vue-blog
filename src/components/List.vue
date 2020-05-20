@@ -1,8 +1,9 @@
 <template>
   <Scroll class="list" :height="500" :on-reach-bottom="handleReachBottom">
-    <Card :key="index" v-for="(item,index) in list" style="width:90%;margin:0 auto;margin-bottom:20px;cursor:pointer;">
+    <Card @click.prevent="article" :key="index" v-for="(item,index) in list" style="width:90%;margin:0 auto;margin-bottom:20px;cursor:pointer;">
             <p @click.prevent="article" slot="title">测试标题</p>
-            <p @click.prevent="article">作者：xxxx</p>
+            <p >作者：xxxx</p>
+            <p >时间：2020-05-20 10:10:10</p>
             <p @click.prevent="article">测试简介测试简介测试简介...........</p>
     </Card>
   </Scroll>
