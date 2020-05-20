@@ -1,7 +1,8 @@
 <template>
-  <Scroll :height="500" :on-reach-bottom="handleReachBottom">
-    <Card :key="index" v-for="(item,index) in list1" style="width:950px;margin:0 auto;margin-bottom:20px;cursor:pointer;">
+  <Scroll class="list" :height="500" :on-reach-bottom="handleReachBottom">
+    <Card :key="index" v-for="(item,index) in list1" style="width:90%;margin:0 auto;margin-bottom:20px;cursor:pointer;">
             <p slot="title">测试标题</p>
+            <p>作者：xxxx</p>
             <p>测试简介测试简介测试简介...........</p>
     </Card>
   </Scroll>
@@ -32,4 +33,5 @@ export default {
 };
 </script>
 <style scoped>
+
 </style>
