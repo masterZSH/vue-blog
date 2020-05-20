@@ -11,8 +11,12 @@
 
 <script>
 import configMenu from "../config/menu";
+import menuMixIn from '../mixins/menu'
+
+
 export default {
   name: "Header",
+  mixins: [menuMixIn],
   mounted() {
     if (this.$store.state.menu.menus.length === 0) {
       this.$store.dispatch("initMenu", configMenu);
@@ -28,9 +32,6 @@ export default {
     };
   },
   methods: {
-    selectMenu: function(e) {
-       this.$emit("selectMenu",e);
-    }
   }
 };
 </script>
@@ -41,5 +42,7 @@ export default {
   font-size: 20px;
   color: #101010;
   cursor: pointer;
+  text-align: center;
+  margin-left: 40%;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <Card title="介绍" icon="ios-bookmark" :padding="0" class="intro">
+  <Card title="介绍" icon="ios-contact"  :padding="0" class="intro">
     <CellGroup>
       <Cell title="昵称：xxxx" />
       <Cell title="年龄：xxxx" />

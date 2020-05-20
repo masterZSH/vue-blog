@@ -6,9 +6,10 @@ export default [
         active: true,
     },
     {
-        name: "test",
-        title: "测试",
+        name: "data-flow",
+        title: "数据流",
         icon: "newspaper-outline",
-        active: false
+        active: false,
+        to: "/flow"
     }
 ]

@@ -1,16 +1,6 @@
 <template>
-  <Card class="tags" icon="ios-bookmark">
-    <p slot="title">标签</p>
-    <Tag class="tag" title="go" color="primary">go</Tag>
-    <Tag color="success">node.js</Tag>
-    <Tag color="error">php</Tag>
-    <Tag color="warning">linux</Tag>
-    <Tag color="magenta">algorithm</Tag>
-    <Tag color="red">netword</Tag>
-    <Tag color="volcano">css</Tag>
-    <Tag color="orange">js</Tag>
-    <Tag color="gold">vue</Tag>
-    <Tag color="#FFA2D3">react</Tag>
+  <Card icon="ios-bookmark" title="标签" class="tags">
+    <Tag :key="key" v-for="(item,key) in tagList" class="tag" :title="item" :color="getColor()">{{item}}</Tag>
   </Card>
 </template>
 
@@ -18,12 +8,28 @@
 export default {
   name: "Tags",
   data() {
-    return {};
+    return {
+       tagList:[
+         "go","node.js","php","linux",
+         "algorithm","network","css","js",
+         "vue","react"
+       ]
+    };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    getColor(){
+      let colorList = [
+        "success","error","warning",
+        "magenta","red","volcano",
+        "orange","gold","#FFA2D3",
+        "#ccc"
+      ]
+      return colorList[Math.floor(10 * Math.random())]
+    }
+  },
   props: {},
-  watch: {}
+  watch: {},
 };
 </script>
 

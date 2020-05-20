@@ -2,12 +2,12 @@
   <div>
     <Header @selectMenu="selectMenu"></Header>
     <Row class="content">
-      <i-col span="16">
+      <i-col span="17">
         <div class="list">
           <List></List>
         </div>
       </i-col>
-      <i-col span="8" >
+      <i-col span="7" >
         <Intro></Intro>
         <Tags></Tags>
       </i-col>

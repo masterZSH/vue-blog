@@ -1,9 +1,9 @@
 <template>
   <Scroll class="list" :height="500" :on-reach-bottom="handleReachBottom">
-    <Card :key="index" v-for="(item,index) in list1" style="width:90%;margin:0 auto;margin-bottom:20px;cursor:pointer;">
-            <p slot="title">测试标题</p>
-            <p>作者：xxxx</p>
-            <p>测试简介测试简介测试简介...........</p>
+    <Card :key="index" v-for="(item,index) in list" style="width:90%;margin:0 auto;margin-bottom:20px;cursor:pointer;">
+            <p @click.prevent="article" slot="title">测试标题</p>
+            <p @click.prevent="article">作者：xxxx</p>
+            <p @click.prevent="article">测试简介测试简介测试简介...........</p>
     </Card>
   </Scroll>
 </template>
@@ -14,7 +14,7 @@ export default {
   components: {},
   data() {
     return {
-      list1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     };
   },
   methods: {
@@ -28,6 +28,10 @@ export default {
           resolve();
         }, 2000);
       });
+    },
+    article(){
+      console.log(1);
+      this.$router.push(`article/${1}`);
     }
   }
 };
