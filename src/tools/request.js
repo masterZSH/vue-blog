@@ -2,7 +2,7 @@ import axios from 'axios'
 import apiConfig from '../config/api'
 
 const instance = axios.create({
-    baseURL: apiConfig.baseURL,
+    baseURL: apiConfig.baseURL + `/${apiConfig.version}`,
     timeout: apiConfig.timeout,
     transformResponse: [function (data) {
         // 需要转换的话
