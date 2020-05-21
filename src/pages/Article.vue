@@ -14,10 +14,11 @@
 </template>
 
 <script>
-import Header from "./Header";
-import Intro from "./Intro";
-import Tags from "./Tags";
+import Header from "../components/Header";
+import Intro from "../components/Intro";
+import Tags from "../components/Tags";
 import markedMixIn from "../mixins/marked";
+
 export default {
   name: "Article",
   mixins: [markedMixIn],

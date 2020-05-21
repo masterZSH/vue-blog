@@ -3,9 +3,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 
 import App from '../App.vue'
-import Index from '../components/Index.vue'
-import Article from '../components/Article.vue'
-import Flow from '../components/Flow.vue'
+import Index from '../pages/Index.vue'
+import Article from '../pages/Article.vue'
+import Flow from '../pages/Flow.vue'
+import Edit from '../pages/Edit.vue';
 
 const routes = [
   {
@@ -27,6 +28,10 @@ const routes = [
     {
       path: 'flow',
       component: Flow
+    },
+    {
+      path: 'edit',
+      component: Edit
     },
   ]
   },

@@ -16,10 +16,10 @@
 </template>
 
 <script>
-import Header from "./Header";
-import List from "./List";
-import Intro from "./Intro";
-import Tags from "./Tags";
+import Header from "../components/Header";
+import List from "../components/List";
+import Intro from "../components/Intro";
+import Tags from "../components/Tags";
 export default {
   name: "Index",
   mounted() {},
@@ -40,15 +40,9 @@ export default {
 };
 </script>
 <style scoped>
-@import "../assets/common.css";
-
-
-
 .content {
   height: 80vh;
   width: 94%;
   margin: 20px auto;
 }
-
-
 </style>
