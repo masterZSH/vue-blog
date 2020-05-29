@@ -5,6 +5,10 @@ import router from './router/router'
 import store from './store/index'
 
 Vue.use(VueRouter)
+// 注册全局错误处理
+Vue.config.errorHandler = function (err, vm, info) {
+    console.log(err,vm,info);
+}
 Vue.config.productionTip = false
 new Vue({
   router,
