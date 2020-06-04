@@ -1,11 +1,11 @@
 <template>
   <Scroll class="list" :height="500" :on-reach-bottom="handleReachBottom">
     <Card :key="index" v-for="(item,index) in list" style="width:90%;margin:0 auto;margin-bottom:20px;cursor:pointer;">
-            <p @click="articleDetails" slot="title">测试标题</p>
+            <p @click="articleDetails" slot="title">{{item.title}}</p>
             <div @click="articleDetails">
-              <p>作者：xxxx</p>
-              <p>时间：2020-05-20 10:10:10</p>
-              <p>测试简介测试简介测试简介...........</p>
+              <p>作者：{{item.author}}</p>
+              <p>时间：{{item.time}}</p>
+              <p>{{item.content}}</p>
             </div>
     </Card>
   </Scroll>
@@ -14,6 +14,7 @@
 <script>
 import articleConfig from "../config/article"
 import {getArticles}    from "../api/article"
+import moment from 'moment'
 
 export default {
   name: "List",
@@ -44,15 +45,21 @@ export default {
 
     // 跳转详情页
     articleDetails(){
-      console.log(1);
       this.$router.push(`article/${1}`);
     },
     
-    getList:async function(){
-      let list = await getArticles(this.page,this.size);
-           this.$store.dispatch("getList");
+    async getList(){
+      let data = await getArticles(this.page,this.size);
+      this.$store.dispatch("getList",data.list);
+      this.list = this.mapList(data.list);
+      console.log( data.list);
+    },
 
-      console.log(list);
+    mapList(list){
+       list.map(item=>{
+          item.time = moment(item.time).format("YYYY-MM-DD HH:mm:ss")
+       })
+       return list;
     }
   }
 };

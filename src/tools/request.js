@@ -18,10 +18,10 @@ const instance = axios.create({
         console.log(progressEvent);
     },
 
-    withCredentials: true, // default
+    // withCredentials: true, // default
 
     headers: {
-        'X-Custom-Header': 'foobar'
+
     },
 
     // proxy: {
@@ -34,6 +34,7 @@ const instance = axios.create({
     //   },
 
     responseType: 'json', // default
+    crossDomain: true, // 跨域
 });
 
 /**
@@ -74,7 +75,16 @@ function put(url, data) {
  * @param {string} url 
  */
 function get(url) {
-    return instance.get(url)
+    return new Promise((resolve, reject) => {
+        instance.get(url).then((res) => {
+            if (res.data.code === 200 && res.data.msg === "success") {
+                resolve(res.data.data)
+            }
+            reject(res.data)
+        }).catch(e => {
+            reject(e)
+        });
+    })
 }
 
 
