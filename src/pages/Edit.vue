@@ -10,7 +10,7 @@
         size="large"
         placeholder="输入标题"
       ></i-input>
-      <Button  class="btn-save" type="primary" size="large">保存</Button>
+      <Button class="btn-save" type="primary" size="large">保存</Button>
     </div>
 
     <div class="tag">
@@ -37,7 +37,7 @@
     <div class="containers">
       <Row>
         <i-col span="12">
-          <textarea class="markdown" v-model="md"></textarea>
+          <textarea id="code" name="code" class="markdown" v-model="md"></textarea>
         </i-col>
         <i-col span="12">
           <div class="container" v-html="html"></div>
@@ -50,6 +50,8 @@
 <script>
 import markedMixIn from "../mixins/marked";
 import articleConfig from "../config/article";
+import * as CodeMirror from "codemirror/lib/codemirror";
+import "codemirror/lib/codemirror.css";
 
 export default {
   name: "Edit",
@@ -63,7 +65,9 @@ export default {
       md: ""
     };
   },
-  mounted() {},
+  mounted() {
+    this.initTextArea();
+  },
   methods: {
     /**
      * 确认标签
@@ -90,6 +94,16 @@ export default {
      */
     closeTag(key) {
       this.tags.splice(key, 1);
+    },
+
+    // 初始化编辑器
+    initTextArea() {
+      let myTextarea = document.getElementById("code");
+      this.CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
+        mode: "javascript", //编辑器语言
+        theme: "monokai", //编辑器主题
+        extraKeys: { Ctrl: "autocomplete" }, //ctrl可以弹出选择项
+      });
     }
   },
   props: {},
@@ -103,8 +117,7 @@ export default {
 </script>
 
 <style scoped>
-
-.top{
+.top {
   width: 90%;
   margin: 10px auto;
   display: block;
@@ -114,9 +127,9 @@ export default {
   width: 80%;
 }
 
-.btn-save{
-    margin-left: 20px;
-    width: 120px;
+.btn-save {
+  margin-left: 20px;
+  width: 120px;
 }
 
 .tag {
@@ -155,7 +168,7 @@ export default {
 
 .containers .container {
   min-height: 80vh;
-  border:1px solid #eee;
+  border: 1px solid #eee;
   border-radius: 5px;
   margin-top: 10px;
   padding: 5px;
@@ -167,10 +180,9 @@ export default {
   flex-shrink: 1;
 }
 
-.containers .container:hover{
-    border-color: #ccc;
+.containers .container:hover {
+  border-color: #ccc;
 }
-
 
 .containers .container textarea {
   margin-top: 5px;
@@ -184,8 +196,6 @@ export default {
 .containers .container textarea:hover {
   border-color: #a33991;
 }
-
-
 </style>
 
 

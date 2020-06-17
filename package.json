@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "codemirror": "^5.54.0",
     "core-js": "^3.6.4",
     "marked": "^1.1.0",
     "moment": "^2.26.0",
