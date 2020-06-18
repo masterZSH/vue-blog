@@ -10,7 +10,7 @@
         size="large"
         placeholder="输入标题"
       ></i-input>
-      <Button class="btn-save" type="primary" size="large">保存</Button>
+      <Button @click="save" class="btn-save" type="primary" size="large">保存</Button>
     </div>
 
     <div class="tag">
@@ -50,6 +50,9 @@
 <script>
 import markedMixIn from "../mixins/marked";
 import articleConfig from "../config/article";
+import {login} from "../api/auth";
+import {addArticle} from "../api/article";
+
 import CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/markdown/markdown.js";
@@ -59,20 +62,20 @@ export default {
   mixins: [markedMixIn],
   data() {
     return {
-      title: "",
-      tags: [],
-      tag: "",
-      html: "",
-      md: ""
+      title: "",   // 标题
+      tags: [],    // 标签列表
+      tag:"",      // 标签输入
+      html: "",    // markdown转换的html
+      md: "",      // markdown文字
     };
   },
   mounted() {
     this.initTextArea();
+    this.login();
   },
   methods: {
-    /**
-     * 确认标签
-     */
+
+    // 确认输入标签
     enterTag(e) {
       if (e.key === "Enter") {
         this.appendTag(this.tag);
@@ -80,6 +83,7 @@ export default {
       }
     },
 
+    // 添加标签
     appendTag(tag) {
       // 最大标签数不超过5个
       let maxTagNum = articleConfig.maxTagNum || 5;
@@ -90,9 +94,7 @@ export default {
       this.tags.push(tag);
     },
 
-    /**
-     * 关闭标签
-     */
+    // 关闭标签
     closeTag(key) {
       this.tags.splice(key, 1);
     },
@@ -106,9 +108,53 @@ export default {
         highlightFormatting: true,
         line: true,
       });
-      this.CodeMirrorEditor.on('change',function(cm){
-          cm.toTextArea()
+      this.CodeMirrorEditor.on('change',(cm)=>{
+          this.md = cm.doc.getValue();
       })
+    },
+
+    // 保存
+    async save(){
+        // 检查地方较少不引入太多依赖
+        if(!this.validate()) return;
+        let resp = await addArticle(this.title,
+        this.md,this.tags);
+        console.log(resp);
+
+
+
+    },
+
+
+    // 验证输入
+    validate(){
+        if(this.title === ""){
+          this.$Message.error(`请填写标题`);
+          return false;
+        }
+
+        if(this.tags.length === 0){
+          this.$Message.error(`请输入标签`);
+          return false;
+        }
+
+        if(this.md === ""){
+          this.$Message.error(`请输入内容`);
+          return false;
+        }
+        return true;
+    },
+
+    // 登录
+    async login(){
+       let query = this.$route.query;
+       if (!query.username || !query.secret){
+          this.$Message.error(`授权信息错误`);
+          return ;
+       }
+       let resp = await login.call(this,query.username,query.secret);
+       sessionStorage.setItem("GOBLOGTOKEN",resp.token);
+       // todo 自动刷新token
     }
   },
   props: {},
@@ -121,7 +167,7 @@ export default {
 };
 </script>
 
-<style >
+<style  scoped>
 
 .top {
   width: 90%;
@@ -173,6 +219,7 @@ export default {
 }
 
 .containers .container {
+  max-height: 80vh;
   min-height: 80vh;
   border: 1px solid #eee;
   border-radius: 5px;
@@ -203,19 +250,7 @@ export default {
   border-color: #a33991;
 }
 
-.CodeMirror{
-  min-height: 80vh;
-  margin-top: 10px;
-  width: 94%;
-  border: 1px solid #eee;
-  border-radius: 5px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.CodeMirror:hover {
-    border-color: #ccc;
-}
 </style>
 
 

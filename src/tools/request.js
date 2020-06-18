@@ -48,13 +48,12 @@ function del(url) {
 
 /**
  * post请求 用于新增资源操作
+ * 新增需要jwt认证
  * 
  * @param {string} url 
  */
-function post(url, data) {
-    return instance.post(url, {
-        data: data
-    });
+function post(url, data, config={}) {
+    return instance.post(url, data, config);
 }
 
 /**
@@ -74,14 +73,16 @@ function put(url, data) {
  * 
  * @param {string} url 
  */
-function get(url) {
+function get(url,config) {
+    let that = this;
     return new Promise((resolve, reject) => {
-        instance.get(url).then((res) => {
+        instance.get(url,config).then((res) => {
             if (res.data.code === 200 && res.data.msg === "success") {
                 resolve(res.data.data)
             }
             reject(res.data)
         }).catch(e => {
+            that.$Message.error(e.response.data.msg);
             reject(e)
         });
     })
