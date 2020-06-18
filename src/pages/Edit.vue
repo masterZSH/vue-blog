@@ -50,9 +50,10 @@
 <script>
 import markedMixIn from "../mixins/marked";
 import articleConfig from "../config/article";
-import * as CodeMirror from "codemirror/lib/codemirror";
+import CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
-
+import "codemirror/mode/markdown/markdown.js";
+import "codemirror/theme/xq-light.css"
 export default {
   name: "Edit",
   mixins: [markedMixIn],
@@ -100,10 +101,14 @@ export default {
     initTextArea() {
       let myTextarea = document.getElementById("code");
       this.CodeMirrorEditor = CodeMirror.fromTextArea(myTextarea, {
-        mode: "javascript", //编辑器语言
-        theme: "monokai", //编辑器主题
-        extraKeys: { Ctrl: "autocomplete" }, //ctrl可以弹出选择项
+        mode: "text/x-markdown",
+        theme: "default",
+        highlightFormatting: true,
+        line: true,
       });
+      this.CodeMirrorEditor.on('change',function(cm){
+          cm.toTextArea()
+      })
     }
   },
   props: {},
@@ -116,7 +121,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
+
 .top {
   width: 90%;
   margin: 10px auto;
@@ -195,6 +201,20 @@ export default {
 
 .containers .container textarea:hover {
   border-color: #a33991;
+}
+
+.CodeMirror{
+  min-height: 80vh;
+  margin-top: 10px;
+  width: 94%;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.CodeMirror:hover {
+    border-color: #ccc;
 }
 </style>
 
