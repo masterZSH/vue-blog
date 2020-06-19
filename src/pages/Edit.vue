@@ -90,7 +90,9 @@ export default {
         this.$Message.error(`最多只能添加${maxTagNum}个标签`);
         return;
       }
-      this.tags.push(tag);
+      let tagSet = new Set(this.tags)
+      tagSet.add(tag)
+      this.tags = Array.from(tagSet)
     },
 
     // 关闭标签
