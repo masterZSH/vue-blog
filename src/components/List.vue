@@ -57,7 +57,7 @@ export default {
     // 跳转详情页
     articleDetails(idx) {
       let id = this.list[idx]._id;
-      this.$router.push(`article/${id}`);
+      this.$router.push(`/article/${id}`);
     },
 
     async getList() {
