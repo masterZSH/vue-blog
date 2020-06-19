@@ -40,11 +40,10 @@ export default {
   methods: {
     async getArticle(){
       let id = this.$route.params.id;
-      console.log(id,this);
       let article = await getArticle(id);
       this.article = article
       this.html = this.marked(article.content);
-
+      document.title = article.title;
     }
   },
   props: {},
