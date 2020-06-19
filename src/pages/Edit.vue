@@ -50,23 +50,23 @@
 <script>
 import markedMixIn from "../mixins/marked";
 import articleConfig from "../config/article";
-import {login} from "../api/auth";
-import {addArticle} from "../api/article";
+import { login } from "../api/auth";
+import { addArticle } from "../api/article";
 
 import CodeMirror from "codemirror";
 import "codemirror/lib/codemirror.css";
 import "codemirror/mode/markdown/markdown.js";
-import "codemirror/theme/xq-light.css"
+import "codemirror/theme/xq-light.css";
 export default {
   name: "Edit",
   mixins: [markedMixIn],
   data() {
     return {
-      title: "",   // 标题
-      tags: [],    // 标签列表
-      tag:"",      // 标签输入
-      html: "",    // markdown转换的html
-      md: "",      // markdown文字
+      title: "", // 标题
+      tags: [], // 标签列表
+      tag: "", // 标签输入
+      html: "", // markdown转换的html
+      md: "" // markdown文字
     };
   },
   mounted() {
@@ -74,7 +74,6 @@ export default {
     this.login();
   },
   methods: {
-
     // 确认输入标签
     enterTag(e) {
       if (e.key === "Enter") {
@@ -106,55 +105,51 @@ export default {
         mode: "text/x-markdown",
         theme: "default",
         highlightFormatting: true,
-        line: true,
+        line: true
       });
-      this.CodeMirrorEditor.on('change',(cm)=>{
-          this.md = cm.doc.getValue();
-      })
+      this.CodeMirrorEditor.on("change", cm => {
+        this.md = cm.doc.getValue();
+      });
     },
 
     // 保存
-    async save(){
-        // 检查地方较少不引入太多依赖
-        if(!this.validate()) return;
-        let resp = await addArticle(this.title,
-        this.md,this.tags);
-        console.log(resp);
-
-
-
+    async save() {
+      if (!this.validate()) return;
+      let resp = await addArticle(this.title, this.md, this.tags);
+      if(resp.status === 200){
+        this.$Message.success("保存成功");
+      }
     },
 
-
     // 验证输入
-    validate(){
-        if(this.title === ""){
-          this.$Message.error(`请填写标题`);
-          return false;
-        }
+    validate() {
+      if (this.title === "") {
+        this.$Message.error(`请填写标题`);
+        return false;
+      }
 
-        if(this.tags.length === 0){
-          this.$Message.error(`请输入标签`);
-          return false;
-        }
+      if (this.tags.length === 0) {
+        this.$Message.error(`请输入标签`);
+        return false;
+      }
 
-        if(this.md === ""){
-          this.$Message.error(`请输入内容`);
-          return false;
-        }
-        return true;
+      if (this.md === "") {
+        this.$Message.error(`请输入内容`);
+        return false;
+      }
+      return true;
     },
 
     // 登录
-    async login(){
-       let query = this.$route.query;
-       if (!query.username || !query.secret){
-          this.$Message.error(`授权信息错误`);
-          return ;
-       }
-       let resp = await login.call(this,query.username,query.secret);
-       sessionStorage.setItem("GOBLOGTOKEN",resp.token);
-       // todo 自动刷新token
+    async login() {
+      let query = this.$route.query;
+      if (!query.username || !query.secret) {
+        this.$Message.error(`授权信息错误`);
+        return;
+      }
+      let resp = await login.call(this, query.username, query.secret);
+      sessionStorage.setItem("GOBLOGTOKEN", resp.token);
+      // todo 自动刷新token
     }
   },
   props: {},
@@ -168,7 +163,6 @@ export default {
 </script>
 
 <style  scoped>
-
 .top {
   width: 90%;
   margin: 10px auto;
@@ -249,8 +243,6 @@ export default {
 .containers .container textarea:hover {
   border-color: #a33991;
 }
-
-
 </style>
 
 

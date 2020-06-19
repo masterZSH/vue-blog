@@ -1,6 +1,7 @@
 import request from '../tools/request'
 
 import articleConfig from "../config/article";
+
 // 获取文章列表接口
 export const getArticles = (page, size) => {
     return request.get(`/articles?page=${page}&size=${size}`);
