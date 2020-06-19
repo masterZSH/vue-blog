@@ -1,9 +1,15 @@
 <template>
   <Card title="介绍" icon="ios-contact"  :padding="0" class="intro">
     <CellGroup>
-      <Cell title="昵称：xxxx" />
-      <Cell title="年龄：xxxx" />
-      <Cell title="性别：xxxx" />
+      <Cell>
+        <span @click="backend">后端源码</span>
+      </Cell>
+      <Cell>
+        <span @click="frontend">前端源码</span>
+      </Cell>
+      <Cell>
+        <span @click="resources">by zsh</span>
+      </Cell>
     </CellGroup>
   </Card>
 </template>
@@ -15,9 +21,17 @@ export default {
     return {};
   },
   mounted() {},
-  methods: {},
-  props: {},
-  watch: {}
+  methods: {
+    resources(){
+      window.open("https://github.com/masterZSH","__blank")
+    },
+    backend(){
+      window.open("https://github.com/masterZSH/goBlog","__blank")
+    },
+    frontend(){
+      window.open("https://github.com/masterZSH/vue-blog","__blank")
+    }
+  }
 };
 </script>
 

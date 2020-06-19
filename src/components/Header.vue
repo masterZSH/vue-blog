@@ -1,7 +1,7 @@
 <template>
   <Menu v-if="menus.length>0" v-on:on-select="selectMenu" mode="horizontal" :theme="theme" :active-name="activeMenu.name">
     <div class="in-block site">
-      <router-link to="/flow">我的站点</router-link>
+      <router-link to="/">goBlog</router-link>
     </div>
     <MenuItem :key="key" :name="item.name" v-for="(item,key) in menus">
       <Icon :type="item.icon" />{{item.title}}

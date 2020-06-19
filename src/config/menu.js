@@ -6,11 +6,11 @@ export default [
         active: true,
         to: "/index"
     },
-    {
-        name: "data-flow",
-        title: "数据流",
-        icon: "newspaper-outline",
-        active: false,
-        to: "/flow"
-    }
+    // {
+    //     name: "data-flow",
+    //     title: "",
+    //     icon: "newspaper-outline",
+    //     active: false,
+    //     to: "/"
+    // }
 ]

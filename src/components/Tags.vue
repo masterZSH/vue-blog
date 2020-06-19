@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { getTags } from "../api/tag";
+
 export default {
   name: "Tags",
   data() {
@@ -14,7 +16,9 @@ export default {
        
     };
   },
-  mounted() {},
+  mounted() {
+    this.getTags();
+  },
   methods: {
     // 获取颜色
     getColor(){
@@ -30,6 +34,11 @@ export default {
     chooseTag(key)  {
       let tag = this.tags[key]
       this.$router.push({ path: `/index/${tag}`})
+    },
+
+    async getTags() {
+      let tags = await getTags();
+      this.$store.dispatch("getTags", tags);
     }
   },
   props: {},

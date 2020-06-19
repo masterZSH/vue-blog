@@ -12,6 +12,10 @@
         <p>{{description(item.content)}}</p>
       </div>
     </Card>
+    <Spin fix v-if="loading">
+      <Icon type="ios-loading" size="18" class="spin-icon-load"></Icon>
+      <div>加载中</div>
+  </Spin>
   </Scroll>
 </template>
 
@@ -36,7 +40,8 @@ export default {
       size: articleConfig.defaultPageSize,
       tag: "",
       list: [],
-      noMore: false
+      noMore: false,
+      loading:false, 
     };
   },
   methods: {
@@ -56,7 +61,9 @@ export default {
     },
 
     async getList() {
+      this.loading = true;
       let data = await getArticles(this.page, this.size, this.tag);
+      this.loading = false;
       if (this.noMore) return;
       if (!data.list) {
         this.noMore = true;
@@ -100,14 +107,15 @@ export default {
   watch: {
     $route: {
       handler: function(val) {
-        if (val.params.tag) {
           let tag = val.params.tag;
+          if(undefined === tag){
+            tag = ""
+          }
           this.initPage();
           this.tag = tag;
           this.$store.dispatch("getList", []);
           this.list = [];
           this.getList();
-        }
       },
       // 深度观察监听
       deep: true
@@ -116,4 +124,18 @@ export default {
 };
 </script>
 <style scoped>
+.spin-icon-load {
+  animation: ani-demo-spin 1s linear infinite;
+}
+@keyframes ani-demo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 </style>

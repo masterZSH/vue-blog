@@ -44,9 +44,7 @@ export default {
       this.$store.dispatch("getTags", tags);
     }
   },
-  watch: {
-    
-  }
+  watch: {}
 };
 </script>
 <style scoped>
