@@ -23,6 +23,10 @@ import moment from "moment";
 export default {
   name: "List",
   mounted() {
+    let tag = this.$route.params.tag;
+    if(tag){
+      this.tag = tag;
+    }
     this.getList();
   },
   components: {},
@@ -30,6 +34,7 @@ export default {
     return {
       page: articleConfig.defaultPage,
       size: articleConfig.defaultPageSize,
+      tag: "",
       list: [],
       noMore: false
     };
@@ -51,7 +56,7 @@ export default {
     },
 
     async getList() {
-      let data = await getArticles(this.page, this.size);
+      let data = await getArticles(this.page, this.size, this.tag);
       if (this.noMore) return;
       if (!data.list) {
         this.noMore = true;
@@ -85,6 +90,27 @@ export default {
         desc = `${desc}...`;
       }
       return `${desc}`;
+    },
+
+    // 初始化页面
+    initPage() {
+      this.page = 1;
+    }
+  },
+  watch: {
+    $route: {
+      handler: function(val) {
+        if (val.params.tag) {
+          let tag = val.params.tag;
+          this.initPage();
+          this.tag = tag;
+          this.$store.dispatch("getList", []);
+          this.list = [];
+          this.getList();
+        }
+      },
+      // 深度观察监听
+      deep: true
     }
   }
 };

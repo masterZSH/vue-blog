@@ -26,6 +26,10 @@ const routes = [
       component: Index
     },
     {
+      path: 'index/:tag',
+      component: Index
+    },
+    {
       path: 'flow',
       component: Flow
     },

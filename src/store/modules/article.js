@@ -21,6 +21,10 @@ export default {
                 return;
             }
             context.commit('appendList', list)
+        },
+        // 设置列表
+        setList:(context,list)=>{
+            context.commit('setList', list)
         }
     },
     getters: {

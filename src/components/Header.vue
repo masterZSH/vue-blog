@@ -3,7 +3,7 @@
     <div class="in-block site">
       <router-link to="/flow">我的站点</router-link>
     </div>
-    <MenuItem :key="key"  :name="item.name" v-for="(item,key) in menus">
+    <MenuItem :key="key" :name="item.name" v-for="(item,key) in menus">
       <Icon :type="item.icon" />{{item.title}}
     </MenuItem>
   </Menu>

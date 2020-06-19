@@ -3,8 +3,12 @@ import request from '../tools/request'
 import articleConfig from "../config/article";
 
 // 获取文章列表接口
-export const getArticles = (page, size) => {
-    return request.get(`/articles?page=${page}&size=${size}`);
+export const getArticles = (page, size, tag) => {
+    let url = `/articles?page=${page}&size=${size}`;
+    if (url) {
+        url = `${url}&tag=${tag}`
+    }
+    return request.get(url);
 }
 
 // 添加
@@ -26,6 +30,3 @@ export const addArticle = (title, content, tags) => {
 export const getArticle = (id) => {
     return request.get(`/articles/${id}`);
 }
-
-
-

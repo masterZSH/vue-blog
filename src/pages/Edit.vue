@@ -246,5 +246,3 @@ export default {
   border-color: #a33991;
 }
 </style>
-
-
