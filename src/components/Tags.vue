@@ -37,7 +37,7 @@ export default {
     },
 
     async getTags() {
-      let tags = await getTags();
+      let tags = await getTags.call(this);
       this.$store.dispatch("getTags", tags);
     }
   },

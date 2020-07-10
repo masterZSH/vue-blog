@@ -82,8 +82,11 @@ function get(url,config) {
             }
             reject(res.data)
         }).catch(e => {
-            that.$Message.error(e.response.data.msg);
-            reject(e)
+            let msg = e.response.data ? e.response.data.msg : e.message
+            if(that.$Message){
+                that.$Message.error(msg);
+            }
+            // reject(e)
         });
     })
 }

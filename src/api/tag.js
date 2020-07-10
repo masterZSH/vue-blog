@@ -1,6 +1,6 @@
 import request from '../tools/request'
 
 // 获取标签
-export const getTags = () =>{
-    return request.get(`/tags`);
+export const getTags = function(){
+    return request.get.call(this,`/tags`);
 }

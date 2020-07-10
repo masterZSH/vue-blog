@@ -40,7 +40,7 @@ export default {
       console.log(e);
     },
     async getTags() {
-      let tags = await getTags();
+      let tags = await getTags.call(this);
       this.$store.dispatch("getTags", tags);
     }
   },

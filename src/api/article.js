@@ -27,6 +27,6 @@ export const addArticle = (title, content, tags) => {
 }
 
 // 获取单条文章
-export const getArticle = (id) => {
-    return request.get(`/articles/${id}`);
+export const getArticle = function(id){
+    return request.get.call(this,`/articles/${id}`);
 }

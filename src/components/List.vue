@@ -62,7 +62,8 @@ export default {
 
     async getList() {
       this.loading = true;
-      let data = await getArticles(this.page, this.size, this.tag);
+      setTimeout(()=>this.loading = false,800)
+      let data = await getArticles.call(this,this.page, this.size, this.tag);
       this.loading = false;
       if (this.noMore) return;
       if (!data.list) {
