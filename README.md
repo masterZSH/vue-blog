@@ -1,10 +1,13 @@
 # vue-blog
 
+
+## 技术栈
+
 vue全家桶 vue+vuex+vue-router+iview
 
-markdown 解析
+markdown转html
 
-codemirror 在线写代码
+语法高亮codemirror
 
 
 ## 新增文章
