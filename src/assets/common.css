@@ -21,3 +21,8 @@
 .CodeMirror:hover {
     border-color: #ccc;
 }
+
+/**整体滚动区块高度**/
+.ivu-scroll-container{
+    height: 80vh !important;
+}

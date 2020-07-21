@@ -1,5 +1,5 @@
 <template>
-  <Scroll class="list" :height="500" :on-reach-bottom="handleReachBottom">
+  <Scroll class="list" :on-reach-bottom="handleReachBottom">
     <Card
       :key="index"
       v-for="(item,index) in list"
